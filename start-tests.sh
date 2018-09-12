@@ -2,6 +2,7 @@
 
 if [ "${MODE_TESTS}" = "VERBOSE" ]; then
     if [ ! "${SCRIPT_TEST}" = "" ]; then
+        chmod +x ${SCRIPT_TEST}
         source ${SCRIPT_TEST}
     else
         source example-unit-test.sh

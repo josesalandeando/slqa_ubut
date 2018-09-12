@@ -1,0 +1,5 @@
+@test "test function template - function functionTemplate" {
+    load ${BATS_TEST_DIRNAME}/unit-test.sh.template
+    run testFunctionTemplate
+    [ ! $status -eq 1 ]
+}

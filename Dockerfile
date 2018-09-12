@@ -14,7 +14,7 @@ RUN chmod +x /bats/install.sh
 
 RUN mkdir /batsTest
 
-COPY ["start-tests.sh","utils-test.sh","utils-print.sh","tests/*","example/*","/"]
+COPY ["start-tests.sh","utils-test.sh","utils-print.sh","tests/*","testsBats/*","example/*","/"]
 
 RUN chmod +x /start-tests.sh /utils-test.sh /utils-print.sh /example-unit-test.bats /example-unit-test.sh
 

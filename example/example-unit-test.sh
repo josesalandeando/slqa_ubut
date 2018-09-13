@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-ERROR_RUN_TEST=0
-
 dirActual="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $dirActual/example.sh
 source $dirActual/utils-print.sh
@@ -144,7 +142,3 @@ function testAddNumbers {
 
 printHeaderUnitTest "example.sh" "UT"
 testAddNumbers
-checkIfErrorTestCase "$ERROR_RUN_TEST" "$?"
-ERROR_RUN_TEST=$?
-
-return "$ERROR_RUN_TEST"

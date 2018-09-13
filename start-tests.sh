@@ -8,10 +8,10 @@ if [ "${MODE_TESTS}" = "VERBOSE" ]; then
         source example-unit-test.sh
     fi
 else
-    SCRIPTS_TO_COPY=("example.sh" "example-unit-test.bats")
-    for value in ${SCRIPTS_TO_COPY[@]}; do
-        cp $value /batsTest/bin/
-    done
+    BATS_SCRIPT_RUN="example-unit-test.bats"
+    if [ ! "${SCRIPT_TEST}" = "" ]; then
+        BATS_SCRIPT_RUN=${SCRIPT_TEST}
+    fi
     cd /batsTest/bin/
-    ./bats /
+    ./bats /${BATS_SCRIPT_RUN}
 fi

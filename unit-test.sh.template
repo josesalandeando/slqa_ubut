@@ -83,7 +83,7 @@ function printResultTestFunctionTemplate {
 #   Testing if a list of variables has certains values
     local listVar=("TEST_CASE_VAR_ONE" "TEST_CASE_VAR_TWO")
     local valsToCompare=("$TEST_CASE_VAR_THREE" "$GLOBAL_VAR_TWO")
-    areVariablesEquals "${listVar[@]}" "${valsToCompare[@]}"
+    checkAreVariablesEquals "${listVar[@]}" "${valsToCompare[@]}"
     checkIfFileHasCredentials "./templatePath/$GLOBAL_VAR_TWO" "400"
     checkIfErrorTestCase "$ERROR_UNIT_TEST_FUNCTION" "$?"
     ERROR_UNIT_TEST_FUNCTION=$?

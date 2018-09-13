@@ -22,7 +22,7 @@ If you want to print the results with Bats you also have to develop a .bats file
 Once our test is finished (Remember: if we want to run in "pretty" mode we will have to have two files, one .sh and another .bats). We must copy them in our new docker image to have them available when we lift the container. So we should have in our new Dockerfile two instructions how are you:
 
 ```bash
-COPY ["test-example.sh",""test-example.bats"","/"]
+COPY ["test-example.sh","test-example.bats","/"]
 RUN chmod +x /test-example.sh
 ```
 
@@ -31,7 +31,7 @@ Therefore, our Dockerfile would be a file as simple as the one that follows
 ```bash
 FROM slqa-ubut:latest
 
-COPY ["test-example.sh",""test-example.bats"","/"]
+COPY ["test-example.sh","test-example.bats","/"]
 RUN chmod +x /test-example.sh
 ```
 

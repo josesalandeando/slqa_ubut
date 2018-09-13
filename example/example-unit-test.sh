@@ -37,7 +37,7 @@ function runTestAddNumbers {
 
 #   *************** PRINTS INPUT AND HEADER TEST **********************
     printHeaderTestCaseAndCallFunction "$numTestCase" "$FUNCTION_NAME" "${INPUT_VARIABLES_FUNCTION[@]}"
-#   *************** EXECUTE FUNCTION **********************
+#   *************** RUN FUNCTION **********************
     if [ "$RUN_OPTIONS" = "ERROR_MODE" ]; then
         local EXECUTION_ERROR=$(echo $(addNumbers "$NUMBER_ONE" "$NUMBER_TWO" "RESULT" "$FILE"))
     else

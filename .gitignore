@@ -14,3 +14,10 @@
 # Maven
 log/
 target/
+
+# Owns
+
+tests/
+addNumbersTest.sh
+test-add-numbers.sh
+#./templates/test-add-numbers.sh

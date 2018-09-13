@@ -15,7 +15,7 @@ function prepareGlobalInputForTestCaseFunctionTemplate {
     createDirectory "$GLOBAL_VAR_ONE"
 
 #    Create File
-    createFile "$GLOBAL_VAR_TWO" "./templatePath"
+    createFile "$GLOBAL_VAR_TWO" "$GLOBAL_VAR_THREE"
 
 #    .....
 
@@ -31,7 +31,7 @@ function prepareSpecificInputForTestCaseFunctionTemplate {
     createDirectory "$GLOBAL_VAR_ONE"
 
 #    Create File
-    createFile "$GLOBAL_VAR_TWO" "./templatePath"
+    createFile "$GLOBAL_VAR_TWO" "$GLOBAL_VAR_THREE"
 
 #    .....
 }
@@ -41,7 +41,7 @@ function cleanScenarioAfterExecuteAllTestsFunctionTemplate {
 #    We will destroy all that we have created in prepareSpecificInputForTestCaseFunctionTemplate
     deleteDirectory "$GLOBAL_VAR_ONE"
 
-    deleteDirectory "./templatePath/$GLOBAL_VAR_TWO"
+    deleteDirectory "$GLOBAL_VAR_THREE/$GLOBAL_VAR_TWO"
 
 #    .....
 }
@@ -114,7 +114,7 @@ function runTestFunctionTemplate {
 #   *************** PRINTS INPUT AND HEADER TEST **********************
     printHeaderTestCaseAndCallFunction "$numTestCase" "$FUNCTION_NAME" "${INPUT_VARIABLES_FUNCTION[@]}"
 
-#   *************** EXECUTE FUNCTION **********************
+#   *************** RUN FUNCTION **********************
     functionTemplate "$GLOBAL_VAR_ONE" "$GLOBAL_VAR_TWO" "$TEST_CASE_VAR_ONE" "$TEST_CASE_VAR_TWO" "$TEST_CASE_VAR_THREE"
 
 #   *************** PRINTS RESULT TEST **********************
@@ -130,8 +130,9 @@ function runTestFunctionTemplate {
 ERROR_UNIT_TEST_FUNCTION=0
 FUNCTION_NAME="templateFunction"
 #   *************** FUNCTION INPUT GLOBAL FOR ALL TEST **********************
-GLOBAL_VAR_ONE="global variable one"
-GLOBAL_VAR_TWO="global variable two"
+GLOBAL_VAR_ONE="globalVariableOne"
+GLOBAL_VAR_TWO="globalVariableTwo"
+GLOBAL_VAR_THREE="./templatePath/"
 #   *************** FUNCTION INPUT FOR EVERY TEST CASE **********************
 TEST_CASE_VAR_ONE=""
 TEST_CASE_VAR_TWO=""

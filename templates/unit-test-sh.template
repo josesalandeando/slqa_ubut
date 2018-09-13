@@ -1,0 +1,192 @@
+#!/usr/bin/env bash
+
+dirActual="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $dirActual/SCRIPT_NAME
+source $dirActual/utils-print.sh
+source $dirActual/utils-test.sh
+
+function prepareGlobalInputForTestCaseNAME_FUNCTION {
+
+##    All kind of things that are not initialized variables
+#
+##    EXAMPLES
+#
+##    Create Directory
+#    createDirectory "$GLOBAL_VAR_ONE"
+#
+##    Create File
+#    createFile "$GLOBAL_VAR_TWO" "$GLOBAL_VAR_THREE"
+#
+##    .....
+
+    echo "[INFO] Prepare Function Global Variables"
+
+}
+
+function prepareSpecificInputForTestCaseNAME_FUNCTION {
+
+#    All kind of things that are not initialized variables
+
+#    EXAMPLES
+
+#    Create Directory
+    createDirectory "$GLOBAL_VAR_ONE"
+
+#    Create File
+#    createFile "$GLOBAL_VAR_TWO" "$GLOBAL_VAR_THREE"
+
+#    .....
+}
+
+function cleanScenarioAfterExecuteAllTestsNAME_FUNCTION {
+
+#    We will destroy all that we have created in prepareSpecificInputForTestCaseFunctionTemplate
+    deleteDirectory "$GLOBAL_VAR_ONE"
+
+#    deleteDirectory "$GLOBAL_VAR_THREE/$GLOBAL_VAR_TWO"
+
+#    .....
+}
+
+function printResultTestNAME_FUNCTION {
+
+
+##    Print test case results using utils-test.sh functions
+#
+##    EXAMPLES
+#
+##   Testing if a expression appears in file
+#    checkAppearsInFile "TEST_CASE_VAR_THREE=$TEST_CASE_VAR_THREE" "./templatePath/$GLOBAL_VAR_TWO" "-F"
+#    checkIfErrorTestCase "$ERROR_UNIT_TEST_FUNCTION" "$?"
+#    ERROR_UNIT_TEST_FUNCTION=$?
+#
+##   TEST_CASE_VAR_ONE should appear $numTimesTEST_CASE_VAR_ONE times
+#    checkNumTimesVarInFile "TEST_CASE_VAR_ONE" "$TEST_CASE_VAR_ONE" "./templatePath/$GLOBAL_VAR_TWO" "$GLOBAL_VAR_TWO" "$numTimesTEST_CASE_VAR_ONE"
+##   Behind every test check if exist error
+#    checkIfErrorTestCase "$ERROR_UNIT_TEST_FUNCTION" "$?"
+#    ERROR_UNIT_TEST_FUNCTION=$?
+#
+##   Testing if file generated
+#    checkIfExistsFile "./templatePath/" "${GLOBAL_VAR_ONE}"
+#    checkIfErrorTestCase "$ERROR_UNIT_TEST_FUNCTION" "$?"
+#    ERROR_UNIT_TEST_FUNCTION=$?
+#
+##   Testing if function result (var RESULT) is equal to result expected
+##   Moreover we can say if we expect error and print a message
+#    checkIfResultExpected "$RESULT" "$RESULT_EXPECTED" "N" "$MESSAGE"
+#    checkIfErrorTestCase "$ERROR_UNIT_TEST_FUNCTION" "$?"
+#    ERROR_UNIT_TEST_FUNCTION=$?
+#
+##   Testing if exist directory
+#    checkIfExistsDirectory "./templatePath" "Y"
+#    checkIfErrorTestCase "$ERROR_UNIT_TEST_FUNCTION" "$?"
+#    ERROR_UNIT_TEST_FUNCTION=$?
+#
+##   Testing if a list of variables has certains values
+#    local listVar=("TEST_CASE_VAR_ONE" "TEST_CASE_VAR_TWO")
+#    local valsToCompare=("$TEST_CASE_VAR_THREE" "$GLOBAL_VAR_TWO")
+#    checkAreVariablesEquals "${listVar[@]}" "${valsToCompare[@]}"
+#    checkIfErrorTestCase "$ERROR_UNIT_TEST_FUNCTION" "$?"
+#    ERROR_UNIT_TEST_FUNCTION=$?
+#
+##   Testing if a file has certains credentials
+#    checkIfFileHasCredentials "./templatePath/$GLOBAL_VAR_TWO" "400"
+#    checkIfErrorTestCase "$ERROR_UNIT_TEST_FUNCTION" "$?"
+#    ERROR_UNIT_TEST_FUNCTION=$?
+#
+#
+##   Testing if a list of values are in the file numtimes times
+#    local values=("${TEST_CASE_VAR_TWO}" "${TEST_CASE_VAR_THREE}")
+#    checkIfListValIsInFile "${values[*]}" "5" "./templatePath/$GLOBAL_VAR_TWO"
+#    checkIfErrorTestCase "$ERROR_UNIT_TEST_FUNCTION" "$?"
+#    ERROR_UNIT_TEST_FUNCTION=$?
+#
+##   Testing if variable is in the ENV with value
+#    checkIfVarInEnvWithValue "TEST_CASE_VAR_THREE" "template"
+#    checkIfErrorTestCase "$ERROR_UNIT_TEST_FUNCTION" "$?"
+#    ERROR_UNIT_TEST_FUNCTION=$?
+
+    echo "[INFO] Choose what kind of check you need"
+
+}
+
+function runTestNAME_FUNCTION {
+
+#   *************** FUNCTION SPECIFIC INPUT **********************
+    prepareSpecificInputForTestCaseNAME_FUNCTION
+
+#   *************** PRINTS INPUT AND HEADER TEST **********************
+    printHeaderTestCaseAndCallFunction "$numTestCase" "$FUNCTION_NAME" "${INPUT_VARIABLES_FUNCTION[@]}"
+
+#   *************** RUN FUNCTION **********************
+#    NAMELC_FUNCTION "$GLOBAL_VAR_ONE" "$GLOBAL_VAR_TWO" "$TEST_CASE_VAR_ONE" "$TEST_CASE_VAR_TWO" "$TEST_CASE_VAR_THREE"
+
+#   *************** PRINTS RESULT TEST **********************
+    printFooterCallFunction "$FUNCTION_NAME"
+    printResultTestNAME_FUNCTION
+    printFooterResultTestCase "$FUNCTION_NAME"
+
+#   *************** INCREMENTS NUM TEST CASE **********************
+    numTestCase=$(($numTestCase+1))
+
+}
+
+ERROR_UNIT_TEST_FUNCTION=0
+FUNCTION_NAME="NAMELC_FUNCTION"
+#   *************** FUNCTION INPUT GLOBAL FOR ALL TEST **********************
+GLOBAL_VAR_ONE="globalVariableOne"
+GLOBAL_VAR_TWO="globalVariableTwo"
+GLOBAL_VAR_THREE="./templatePath/"
+#   *************** FUNCTION INPUT FOR EVERY TEST CASE **********************
+TEST_CASE_VAR_ONE=""
+TEST_CASE_VAR_TWO=""
+TEST_CASE_VAR_THREE=""
+INPUT_VARIABLES_FUNCTION=("GLOBAL_VAR_ONE" "GLOBAL_VAR_TWO" "GLOBAL_VAR_THREE" "TEST_CASE_VAR_ONE" "TEST_CASE_VAR_TWO" "TEST_CASE_VAR_THREE")
+#   *************** VARS NEEDED FOR PRINT RESULTS **********************
+numTimesTEST_CASE_VAR_ONE="0"
+#   *************** TEST CASE COUNT **********************
+let numTestCase=1
+
+function testNAME_FUNCTION {
+
+#   *************** Print header of the function **********************
+    printHeaderFunctionTest "$FUNCTION_NAME"
+#   *************** FUNCTION SPECIFIC GLOBAL INPUT **********************
+    prepareGlobalInputForTestCaseNAME_FUNCTION
+
+
+#    TEST CASE 1
+
+#   *************** FUNCTION INPUT **********************
+    TEST_CASE_VAR_ONE="value_test_case_1_1"
+    TEST_CASE_VAR_TWO="value_test_case_1_2"
+    TEST_CASE_VAR_THREE="value_test_case_1_3"
+
+#   *************** VARS NEEDED FOR PRINT RESULTS **********************
+    numTimesTEST_CASE_VAR_ONE="2"
+
+#   *************** RUN TEST FUNCTION **********************
+    runTestNAME_FUNCTION
+
+
+#    TEST CASE 2
+
+    TEST_CASE_VAR_ONE="value_test_case_2_1"
+    TEST_CASE_VAR_TWO="value_test_case_2_2"
+    TEST_CASE_VAR_THREE="value_test_case_2_3"
+    numTimesTEST_CASE_VAR_ONE="5"
+
+    runTestNAME_FUNCTION
+
+
+#   *************** END TEST CASES **********************
+
+#   *************** CLEAN SPECIFIC INPUTS **********************
+    cleanScenarioAfterExecuteAllTestsNAME_FUNCTION
+
+#   *************** CLEAN SPECIFIC INPUTS **********************
+    printFooterFunctionTestCheckingErrors "$FUNCTION_NAME" "$ERROR_UNIT_TEST_FUNCTION"
+
+}
+
+testNAME_FUNCTION

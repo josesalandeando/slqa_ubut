@@ -8,12 +8,12 @@ It's a docker image of a framework built in bash that will allow you to create u
 The Framework is oriented to the develop of tests that wants to validate scripts or functions bash in an unitary way. For it we have created two scripts with utilities for print and checking the results of test (utils-test.sh and utils-print.sh). Furthermore, 
 it is provided with a framework called Bats to print the results of the tests in a more "comfortable" way to read.  
 
-## How to Integrate QA-BASH-Framework in your project
+## How to Integrate SLQA_UBUT_Framework in your project
 
-To do this we put in a Dockerfile the image of QA-BASH-Framework as shown below. With this we would have the two scripts and the framework available for your use 
+To do this we put in a Dockerfile the image of SLQA_UBUT_Framework as shown below. With this we would have the two scripts and the framework available for your use 
 
 ```bash
-FROM qa-utils-bash-unit-tests:latest
+FROM slqa-ubut:latest
 ```
 The next step is to develop our unit tests as shown in the template unit-test.sh.template
 
@@ -29,7 +29,7 @@ RUN chmod +x /test-example.sh
 Therefore, our Dockerfile would be a file as simple as the one that follows
 
 ```bash
-FROM qa-utils-bash-unit-tests:latest
+FROM slqa-ubut:latest
 
 COPY ["test-example.sh",""test-example.bats"","/"]
 RUN chmod +x /test-example.sh

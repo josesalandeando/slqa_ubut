@@ -18,6 +18,7 @@ target/
 # Owns
 
 tests/
-addNumbersTest.sh
+#addNumbersTest.sh
 test-add-numbers.sh
+test-add-numbers.bats
 #./templates/test-add-numbers.sh

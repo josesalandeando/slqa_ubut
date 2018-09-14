@@ -5,7 +5,7 @@ source $dirActual/SCRIPT_NAME
 source $dirActual/utils-print.sh
 source $dirActual/utils-test.sh
 
-function prepareGlobalInputForTestCaseNAME_FUNCTION {
+function prepareGlobalInputForTestCaseFCL_NAME_FUNCTION {
 
 ##    All kind of things that are not initialized variables
 #
@@ -23,7 +23,7 @@ function prepareGlobalInputForTestCaseNAME_FUNCTION {
 
 }
 
-function prepareSpecificInputForTestCaseNAME_FUNCTION {
+function prepareSpecificInputForTestCaseFCL_NAME_FUNCTION {
 
 #    All kind of things that are not initialized variables
 
@@ -38,7 +38,7 @@ function prepareSpecificInputForTestCaseNAME_FUNCTION {
 #    .....
 }
 
-function cleanScenarioAfterExecuteAllTestsNAME_FUNCTION {
+function cleanScenarioAfterExecuteAllTestsFCL_NAME_FUNCTION {
 
 #    We will destroy all that we have created in prepareSpecificInputForTestCaseFunctionTemplate
     deleteDirectory "$GLOBAL_VAR_ONE"
@@ -48,7 +48,7 @@ function cleanScenarioAfterExecuteAllTestsNAME_FUNCTION {
 #    .....
 }
 
-function printResultTestNAME_FUNCTION {
+function printResultTestFCL_NAME_FUNCTION {
 
 
 ##    Print test case results using utils-test.sh functions
@@ -110,20 +110,20 @@ function printResultTestNAME_FUNCTION {
 
 }
 
-function runTestNAME_FUNCTION {
+function runTestFCL_NAME_FUNCTION {
 
 #   *************** FUNCTION SPECIFIC INPUT **********************
-    prepareSpecificInputForTestCaseNAME_FUNCTION
+    prepareSpecificInputForTestCaseFCL_NAME_FUNCTION
 
 #   *************** PRINTS INPUT AND HEADER TEST **********************
     printHeaderTestCaseAndCallFunction "$numTestCase" "$FUNCTION_NAME" "${INPUT_VARIABLES_FUNCTION[@]}"
 
 #   *************** RUN FUNCTION **********************
-#    NAMELC_FUNCTION "$GLOBAL_VAR_ONE" "$GLOBAL_VAR_TWO" "$TEST_CASE_VAR_ONE" "$TEST_CASE_VAR_TWO" "$TEST_CASE_VAR_THREE"
+#    NAME_FUNCTION "$GLOBAL_VAR_ONE" "$GLOBAL_VAR_TWO" "$TEST_CASE_VAR_ONE" "$TEST_CASE_VAR_TWO" "$TEST_CASE_VAR_THREE"
 
 #   *************** PRINTS RESULT TEST **********************
     printFooterCallFunction "$FUNCTION_NAME"
-    printResultTestNAME_FUNCTION
+    printResultTestFCL_NAME_FUNCTION
     printFooterResultTestCase "$FUNCTION_NAME"
 
 #   *************** INCREMENTS NUM TEST CASE **********************
@@ -132,7 +132,7 @@ function runTestNAME_FUNCTION {
 }
 
 ERROR_UNIT_TEST_FUNCTION=0
-FUNCTION_NAME="NAMELC_FUNCTION"
+FUNCTION_NAME="NAME_FUNCTION"
 #   *************** FUNCTION INPUT GLOBAL FOR ALL TEST **********************
 GLOBAL_VAR_ONE="globalVariableOne"
 GLOBAL_VAR_TWO="globalVariableTwo"
@@ -147,12 +147,12 @@ numTimesTEST_CASE_VAR_ONE="0"
 #   *************** TEST CASE COUNT **********************
 let numTestCase=1
 
-function testNAME_FUNCTION {
+function testFCL_NAME_FUNCTION {
 
 #   *************** Print header of the function **********************
     printHeaderFunctionTest "$FUNCTION_NAME"
 #   *************** FUNCTION SPECIFIC GLOBAL INPUT **********************
-    prepareGlobalInputForTestCaseNAME_FUNCTION
+    prepareGlobalInputForTestCaseFCL_NAME_FUNCTION
 
 
 #    TEST CASE 1
@@ -166,7 +166,7 @@ function testNAME_FUNCTION {
     numTimesTEST_CASE_VAR_ONE="2"
 
 #   *************** RUN TEST FUNCTION **********************
-    runTestNAME_FUNCTION
+    runTestFCL_NAME_FUNCTION
 
 
 #    TEST CASE 2
@@ -176,17 +176,17 @@ function testNAME_FUNCTION {
     TEST_CASE_VAR_THREE="value_test_case_2_3"
     numTimesTEST_CASE_VAR_ONE="5"
 
-    runTestNAME_FUNCTION
+    runTestFCL_NAME_FUNCTION
 
 
 #   *************** END TEST CASES **********************
 
 #   *************** CLEAN SPECIFIC INPUTS **********************
-    cleanScenarioAfterExecuteAllTestsNAME_FUNCTION
+    cleanScenarioAfterExecuteAllTestsFCL_NAME_FUNCTION
 
 #   *************** CLEAN SPECIFIC INPUTS **********************
     printFooterFunctionTestCheckingErrors "$FUNCTION_NAME" "$ERROR_UNIT_TEST_FUNCTION"
 
 }
 
-testNAME_FUNCTION
+testFCL_NAME_FUNCTION

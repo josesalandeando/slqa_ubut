@@ -1,5 +1,5 @@
-@test "test SCRIPT_NAME - function NAMELC_FUNCTION " {
-    load ${BATS_TEST_DIRNAME}/FILE_NAME.sh
-    run testNAME_FUNCTION
+@test "test SCRIPT_NAME - function NAME_FUNCTION " {
+    load ${BATS_TEST_DIRNAME}/TEST_SCRIPT_NAME.sh
+    run testFCL_NAME_FUNCTION
     [ ! $status -eq 1 ]
 }

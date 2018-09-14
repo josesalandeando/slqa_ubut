@@ -64,14 +64,38 @@ function createFile {
 
     local FILE=$1
     local PATHFILE=$2
-    echo "[INFO] Creating file $FILE in the path $PATHFILE"
-    touch ${PATHFILE}${FILE}
-    if [ ! -e ${PATHFILE}${FILE} ]; then
+
+    if [ "$PATHFILE" = "" ]; then
+        echo "[INFO] The PATHFILE is empty we understand as PATHFILE ./"
+        PATHFILE="./"
+    fi
+
+    if [ ! -d ${PATHFILE} ]; then
+        echo "[INFO] Directory $PATHFILE NOT EXISTS we need create it"
+        echo "[INFO] Creating path $PATHFILE "
+        mkdir -p $PATHFILE
+    fi
+
+    local FOLDER_LENGTH=${#PATHFILE}
+    local LAST_CHAR="${PATHFILE[@]:$(($FOLDER_LENGTH-1)):1}"
+
+    if [ ! "$LAST_CHAR" = "/" ]; then
+        echo "[INFO] Last char of $PATHFILE must be / we added this char"
+        PATHFILE+=/
+        echo "[INFO] Path file modified and result in $PATHFILE"
+    fi
+
+    local COMPLETE_PATH=${PATHFILE}${FILE}
+    echo "[INFO] Creating file $FILE "
+    echo "" > $COMPLETE_PATH
+
+    if [ ! -e ${COMPLETE_PATH} ]; then
         echo "${RED}[ERROR] File ${FILE} NOT EXISTS in the path $PATHFILE"
         return 1
     fi
     return
 }
+
 
 #####################################################################################################################
 #

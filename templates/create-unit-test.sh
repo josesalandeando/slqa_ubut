@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
-NAME_FUNCTION="AddNumbers"
-NAMELC_FUNCTION="addNumbers"
+NAME_FUNCTION="addNumbers"
+FCL_NAME_FUNCTION=$(echo "$NAME_FUNCTION" | sed 's/^./\u&/')
 SCRIPT_NAME="addNumbersTest.sh"
 TARGET_PATH="./"
-FILE_NAME="test-add-numbers"
+TEST_SCRIPT_NAME="test-add-numbers"
+TESTS_PATH="tests"
 
 
 function createUnitTest {
@@ -14,29 +15,28 @@ function createUnitTest {
     chmod +rwx $MYPWD/unit-test-sh.template
     chmod +rwx $MYPWD/unit-test-bats.template
 
+
+    TESTS_PATH="tests"
+    echo "PATH: $TESTS_PATH"
+    echo "[INFO] Checking if path ${TESTS_PATH} exists"
+    if [ -d $MYPWD/../${TESTS_PATH} ]; then
+        rm -Rf $MYPWD/../${TESTS_PATH}
+        echo "[INFO] Path ${TESTS_PATH} existed and has been deleted"
+    fi
+    echo "[INFO] Creating path $TESTS_PATH "
+    mkdir -p $MYPWD/../$TESTS_PATH
+
+
     #Replace the values in the templates
-    sed -e 's#NAME_FUNCTION#'$NAME_FUNCTION'#g' -e 's#NAMELC_FUNCTION#'$NAMELC_FUNCTION'#g' -e 's#SCRIPT_NAME#'$SCRIPT_NAME'#g' $MYPWD/unit-test-sh.template > $TARGET_PATH/$FILE_NAME.sh
-    sed -e 's#NAMELC_FUNCTION#'$NAMELC_FUNCTION'#g' -e 's#NAME_FUNCTION#'$NAME_FUNCTION'#g' -e 's#SCRIPT_NAME#'$SCRIPT_NAME'#g' -e 's#FILE_NAME#'$FILE_NAME'#g' $MYPWD/unit-test-bats.template > $TARGET_PATH/$FILE_NAME.bats
+    sed -e 's#FCL_NAME_FUNCTION#'$FCL_NAME_FUNCTION'#g' -e 's#NAME_FUNCTION#'$NAME_FUNCTION'#g' -e 's#SCRIPT_NAME#'$SCRIPT_NAME'#g' $MYPWD/unit-test-sh.template > $MYPWD/../$TEST_SCRIPT_NAME.sh
+    sed -e 's#FCL_NAME_FUNCTION#'$FCL_NAME_FUNCTION'#g' -e 's#NAME_FUNCTION#'$NAME_FUNCTION'#g' -e 's#TEST_SCRIPT_NAME#'$TEST_SCRIPT_NAME'#g' -e 's#SCRIPT_NAME#'$SCRIPT_NAME'#g' $MYPWD/unit-test-bats.template > ../$TESTS_PATH/$TEST_SCRIPT_NAME.bats
 
     cp $MYPWD/$SCRIPT_NAME $MYPWD/../
 
-    cp $MYPWD/$FILE_NAME.sh $MYPWD/../
-
-    directory="tests"
-    echo "PATH: $directory"
-    echo "[INFO] Checking if path ${directory} exists"
-    if [ -d ${directory} ]; then
-        rm -Rf $MYPWD/../${directory}
-        echo "[INFO] Path ${directory} existed and has been deleted"
-    fi
-
-    echo "[INFO] Creating path $directory "
-    mkdir -p $MYPWD/../$directory
-
-    cp $MYPWD/$SCRIPT_NAME $MYPWD/../$directory/
-    cp $MYPWD/$FILE_NAME.sh $MYPWD/../$directory
-    cp $MYPWD/$FILE_NAME.bats $MYPWD/../$directory
+    cp $MYPWD/../$SCRIPT_NAME $MYPWD/../$TESTS_PATH
+    cp $MYPWD/../$TEST_SCRIPT_NAME.sh $MYPWD/../$TESTS_PATH
 
 }
+
 
 createUnitTest

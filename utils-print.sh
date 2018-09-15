@@ -213,13 +213,13 @@ function printFooterResultTestCase {
 
 #[INFO] ********** RESULTS UNIT TESTS OF example **********
 #[INFO] FUNCTION: example HAS PASSED ALL TESTS WITH SUCCESS
-#[INFO] ********** END UNIT TESTS OF example **********
+#[INFO] ********** END UNIT TESTS example **********
 
 # Example 1: nameFunction="example" "1" // There is ERROR
 
 #[ERROR] ********** RESULTS UNIT TESTS OF example **********
-#[ERROR] SOME TESTS OF example HAS NOT PASS YOU MUST CHECK THEM
-#[ERROR] ********** END UNIT TESTS OF example **********
+#[ERROR] SOME TESTS OF example HAS NOT PASSED YOU MUST CHECK THEM
+#[ERROR] ********** END UNIT TESTS example **********
 
 #####################################################################################################################
 
@@ -228,13 +228,13 @@ function printFooterFunctionTest {
     local nameFunction=$1
     local error=$2
     if [ "${error}" = "1" ]; then
-        echo -e "${RED}[ERROR] ********** RESULTS UNIT TESTS OF $nameFunction ********** "
-        echo -e "[ERROR] SOME TESTS OF $nameFunction HAS NOT PASS YOU MUST CHECK THEM "
-        echo -e "${RED}[ERROR] ********** END UNIT TESTS OF $nameFunction ********** ${NOCOLOR}"
+        echo -e "${RED}[ERROR] ********** RESULTS UNIT TESTS $nameFunction ********** "
+        echo -e "[ERROR] SOME TESTS OF $nameFunction HAS NOT PASSED YOU MUST CHECK THEM "
+        echo -e "${RED}[ERROR] ********** END UNIT TESTS $nameFunction ********** ${NOCOLOR}"
     else
-        echo -e "${GREEN}[INFO] ********** RESULTS UNIT TESTS OF $nameFunction ********** "
+        echo -e "${GREEN}[INFO] ********** RESULTS UNIT TESTS $nameFunction ********** "
         echo -e "${GREEN}[INFO] FUNCTION: $nameFunction HAS PASSED ALL TESTS WITH SUCCESS "
-        echo -e "${GREEN}[INFO] ********** END UNIT TESTS OF $nameFunction ********** ${NOCOLOR}"
+        echo -e "${GREEN}[INFO] ********** END UNIT TESTS $nameFunction ********** ${NOCOLOR}"
     fi
     echo
     echo

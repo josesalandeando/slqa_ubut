@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-ERROR_RUN_TEST=0
-
 dirActual="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $dirActual/example.sh
 source $dirActual/utils-print.sh
@@ -39,7 +37,7 @@ function runTestAddNumbers {
 
 #   *************** PRINTS INPUT AND HEADER TEST **********************
     printHeaderTestCaseAndCallFunction "$numTestCase" "$FUNCTION_NAME" "${INPUT_VARIABLES_FUNCTION[@]}"
-#   *************** EXECUTE FUNCTION **********************
+#   *************** RUN FUNCTION **********************
     if [ "$RUN_OPTIONS" = "ERROR_MODE" ]; then
         local EXECUTION_ERROR=$(echo $(addNumbers "$NUMBER_ONE" "$NUMBER_TWO" "RESULT" "$FILE"))
     else
@@ -144,7 +142,3 @@ function testAddNumbers {
 
 printHeaderUnitTest "example.sh" "UT"
 testAddNumbers
-checkIfErrorTestCase "$ERROR_RUN_TEST" "$?"
-ERROR_RUN_TEST=$?
-
-return "$ERROR_RUN_TEST"

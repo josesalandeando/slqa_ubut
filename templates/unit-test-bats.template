@@ -1,0 +1,5 @@
+@test "test SCRIPT_NAME - function NAME_FUNCTION " {
+    load ${BATS_TEST_DIRNAME}/TEST_SCRIPT_NAME.sh
+    run testFCL_NAME_FUNCTION
+    [ ! $status -eq 1 ]
+}

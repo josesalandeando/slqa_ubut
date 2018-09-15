@@ -14,7 +14,7 @@ RUN chmod +x /bats/install.sh
 
 RUN mkdir /batsTest
 
-COPY ["start-tests.sh","utils-test.sh","utils-print.sh","example/*","/"]
+COPY ["start-tests.sh","utils-test.sh","utils-print.sh","example/*","tests/*","resources/*","/"]
 
 RUN chmod +x /start-tests.sh /utils-test.sh /utils-print.sh /example-unit-test.bats /example-unit-test.sh
 
@@ -27,5 +27,8 @@ ENV MODE_TESTS=$MODE_TESTS
 
 ARG SCRIPT_TEST
 ENV SCRIPT_TEST=$SCRIPT_TEST
+
+ARG FILE_RESOURCES_SCRIPT_TESTS
+ENV FILE_RESOURCES_SCRIPT_TESTS=$FILE_RESOURCES_SCRIPT_TESTS
 
 ENTRYPOINT ["/start-tests.sh"]

@@ -14,8 +14,8 @@ NOCOLOR='\033[0m'
 
 function createDirectory {
 
-    directory=$1
-    echo "PATH: $directory"
+    local directory=$1
+    echo "[INFO] We want create path: $directory"
     echo "[INFO] Checking if path ${directory} exists"
     if [ -d ${directory} ]; then
         rm -Rf ${directory}
@@ -25,7 +25,7 @@ function createDirectory {
     echo "[INFO] Creating path $directory "
     mkdir -p $directory
     if [ ! -d ${directory} ]; then
-        echo "${RED}[ERROR] Directory $directory NOT EXISTS"
+        echo -e "${RED}[ERROR] Directory $directory NOT EXISTS ${NOCOLOR}"
         return 1
     fi
     echo "[INFO] Path $directory created"
@@ -42,13 +42,22 @@ function createDirectory {
 function deleteDirectory {
 
     local directory=$1
-    if [ -e $directory ]; then
-        rm -Rf $directory
-        echo -e "${GREEN}[INFO] Delete file $directory after execute tests ${NOCOLOR}"
-    else
-        echo -e "${RED}[ERROR] The path $directory that you want delete not exist ${NOCOLOR}"
-        return 1
+    local dirActual="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+    echo -e "${GREEN}[INFO] We want delete path: $directory"
+    echo -e "[INFO] Checking if path ${directory} exists ${NOCOLOR}"
+
+    if [ -d ${directory} ]; then
+        diff -rq ${directory} ${dirActual}
+        if [ "$?" = "0" ]; then
+            echo -e "${RED}[ERROR] SORRY YOU CAN NOT DELETE THIS PATH BECAUSE IT WOULD REMOVE ALL TESTS ${NOCOLOR}"
+            return 1
+        else
+            rm -Rf ${directory}
+            echo -e "${GREEN}[INFO] Delete file $directory after execute tests ${NOCOLOR}"
+        fi
     fi
+
     return
 }
 
@@ -90,7 +99,7 @@ function createFile {
     echo "" > $COMPLETE_PATH
 
     if [ ! -e ${COMPLETE_PATH} ]; then
-        echo "${RED}[ERROR] File ${FILE} NOT EXISTS in the path $PATHFILE"
+        echo -e "${RED}[ERROR] File ${FILE} NOT EXISTS in the path $PATHFILE ${NOCOLOR}"
         return 1
     fi
     return

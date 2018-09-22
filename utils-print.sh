@@ -250,7 +250,7 @@ function printFooterFunctionTest {
 
 #[INFO] -------------------------------------------------------
 #
-#[INFO]  ALL UNIT TESTS PASS WITH SUCCES
+#[INFO]  ALL UNIT TESTS PASS WITH SUCCESS
 #
 #[INFO] -------------------------------------------------------
 
@@ -307,7 +307,7 @@ function printFooterAllTestsWithFails {
 
 #[INFO] -------------------------------------------------------
 #
-#[INFO]  ALL UNIT TESTS PASS WITH SUCCES
+#[INFO]  ALL UNIT TESTS PASS WITH SUCCESS
 #
 #[INFO] -------------------------------------------------------
 
@@ -318,7 +318,7 @@ function printFooterAllTestsWithSuccess {
     echo
     echo -e "${GREEN}[INFO] -------------------------------------------------------"
     echo
-    echo "[INFO]  ALL UNIT TESTS PASS WITH SUCCES"
+    echo "[INFO]  ALL UNIT TESTS PASS WITH SUCCESS"
     echo
     echo -e "[INFO] ------------------------------------------------------- ${NOCOLOR}"
     echo

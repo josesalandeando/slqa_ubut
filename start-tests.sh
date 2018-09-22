@@ -5,6 +5,8 @@ UTILS_TEST="utils-test.sh"
 
 function startTests {
 
+    source create-unit-test-in-docker-container.sh
+
     if [ ! "${FILE_RESOURCES_SCRIPT_TESTS}" = "" ]; then
         if [ "${MODE_TESTS}" = "VERBOSE" ]; then
             for line in $(cat $FILE_RESOURCES_SCRIPT_TESTS); do

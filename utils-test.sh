@@ -395,9 +395,66 @@ function checkIfVarInEnvWithValue {
         echo -e "${GREEN}[INFO] ${variableFind} is in the ENV ${NOCOLOR}"
     else
         echo -e "${RED}[ERROR] ${variableFind} is NOT in the ENV ${NOCOLOR}"
-        echo -e "${RED}[ERROR] Some test of testExportsParams has not pass you must check them ${NOCOLOR}"
         return 1
     fi
 
     return
+}
+
+#####################################################################################################################
+#
+# Function for check if modified date of a file is today
+# Param $1 : pathFile --> Path of file to check
+#
+#####################################################################################################################
+
+function checkIfModifiedDateFileEqualToday {
+
+    local pathFile=$1
+    local modifiedDateFile=$(stat -c '%y' $pathFile | cut -d' ' -f 1)
+    local actualDay=""
+    getActualDay actualDay
+    if [ "$modifiedDateFile" = "$actualDay" ]; then
+        echo -e "${GREEN}[INFO] The file $pathFile has a value $modifiedDateFile in modify Date ${NOCOLOR}"
+    else
+        echo -e "${RED}[ERROR] The file modified date is $modifiedDateFile and today is $actualDay ${NOCOLOR}"
+        return 1
+    fi
+    return
+}
+
+#####################################################################################################################
+#
+# Function for get today date
+# Param $1 : Variable that will contain date today
+#
+#####################################################################################################################
+
+function getActualDay {
+
+    actualDay=`date +"%Y-%m-%d"`
+    eval "$1=$actualDay"
+}
+
+
+#####################################################################################################################
+#
+# Function for check if a certificate is in keystore
+# Param $1 : cerficateName --> Name of certificate
+# Param $2 : keystorePath --> Path of keystore
+#
+#####################################################################################################################
+
+function checkIfCertificateIsInKeystore {
+
+    local cerficateName=$1
+    local keystorePath=$2
+    existCert=$(keytool -list -v -keystore $keystorePath -storepass changeit | grep $cerficateName)
+
+    if [ "$existCert" = "" ]; then
+        echo -e "${RED}[ERROR] The certificate $cerficateName is NOT in keystore $keystorePath ${NOCOLOR}"
+    else
+        echo -e "${GREEN}[INFO] The certificate $cerficateName is in keystore $keystorePath ${NOCOLOR}"
+    fi
+
 }
